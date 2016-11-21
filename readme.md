@@ -26,21 +26,32 @@ first case. This is useful in the case of images of chord charts.
 
 The app will also be able to save these chord charts locally for easy recall.
 
-## Wireframes
-
+### Wireframes
+This is the window when the app is called by keyboard shortcut.
+![tag wireframe](Screenshots/Blank.png)
+The app will automatically look for chords in the highlighted text.
+![tag wireframe](Screenshots/First_Highlight.png)
+Additional highlighted text will be added onto the current query
+![tag wireframe](Screenshots/Add_Highlight.png)
+Chords can also be added on through the text input field
+![tag wireframe](Screenshots/Add_Input.png)
+I am still deciding between displaying the chords on a seperate page or in line with the site. I will implement both.
+![tag wireframe](Screenshots/New_Page_Parse.png)
+![tag wireframe](Screenshots/Sam_Page_Parse.png)
 
 ### Architecture and Technologies
 The project will utilize a couple of music-related javascript libraries to help out with the music logic behind the application.
- - VexChords for chord display
+ - VexChords for chord image display (https://github.com/0xfe/vexchords)
 
 Otherwise, this will be purely JavaScript, HTML, and CSS.
 
 ### Implementation Timeline
 **Day 1**:
-  Text parser to chord data should be implemented. App should be able to differentiate between chord names and parts of other words based on context. App will also be able to show chord spellings based on chord type and be able to transpose these spellings based on the root note.
+  Text parser to chord data logic should be implemented. App should be able to differentiate between chord names and parts of other words based on context. App will also be able to show chord spellings based on chord type and be able to transpose these spellings based on the root note.
 **Day 2**:
   App will be able to take input from the user and parse them into chords.
 **Day 3**:
+  Create views for the results of the app.
 **Day 4**:
 
 ### Bonus features
