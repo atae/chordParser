@@ -29,15 +29,19 @@ The app will also be able to save these chord charts locally for easy recall.
 ### Wireframes
 This is the window when the app is called by keyboard shortcut.
 ![tag wireframe](screenshots/Blank.png)
+
 The app will automatically look for chords in the highlighted text.
 ![tag wireframe](screenshots/First_Highlight.png)
+
 Additional highlighted text will be added onto the current query
 ![tag wireframe](screenshots/Add_Highlight.png)
+
 Chords can also be added on through the text input field
 ![tag wireframe](screenshots/Add_Input.png)
+
 I am still deciding between displaying the chords on a seperate page or in line with the site. I will implement both.
 ![tag wireframe](screenshots/New_Page_Parse.png)
-![tag wireframe](screenshots/Sam_Page_Parse.png)
+![tag wireframe](screenshots/Same_Page_Parse.png)
 
 ### Architecture and Technologies
 The project will utilize a couple of music-related javascript libraries to help out with the music logic behind the application.
@@ -48,11 +52,15 @@ Otherwise, this will be purely JavaScript, HTML, and CSS.
 ### Implementation Timeline
 **Day 1**:
   Text parser to chord data logic should be implemented. App should be able to differentiate between chord names and parts of other words based on context. App will also be able to show chord spellings based on chord type and be able to transpose these spellings based on the root note.
+
 **Day 2**:
   App will be able to take input from the user and parse them into chords.
+
 **Day 3**:
   Create views for the results of the app.
+
 **Day 4**:
+  CSS Styling and Bonus Features
 
 ### Bonus features
 - [ ] Figure out the key of a song based on the chords given.
@@ -64,7 +72,3 @@ Otherwise, this will be purely JavaScript, HTML, and CSS.
 - [ ] Save chord charts in the cloud so the user can take their chord charts with them.
 - [ ] Option to switch chord voicings on a chord-by-chord basis, potentially dynamically altering the positions of the other chords
 - [ ] Recommended notes to improvise with over each chord
-
-
-
-Command+Shift+,
