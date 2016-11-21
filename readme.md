@@ -28,16 +28,16 @@ The app will also be able to save these chord charts locally for easy recall.
 
 ### Wireframes
 This is the window when the app is called by keyboard shortcut.
-![tag wireframe](Screenshots/Blank.png)
+![tag wireframe](screenshots/Blank.png)
 The app will automatically look for chords in the highlighted text.
-![tag wireframe](Screenshots/First_Highlight.png)
+![tag wireframe](screenshots/First_Highlight.png)
 Additional highlighted text will be added onto the current query
-![tag wireframe](Screenshots/Add_Highlight.png)
+![tag wireframe](screenshots/Add_Highlight.png)
 Chords can also be added on through the text input field
-![tag wireframe](Screenshots/Add_Input.png)
+![tag wireframe](screenshots/Add_Input.png)
 I am still deciding between displaying the chords on a seperate page or in line with the site. I will implement both.
-![tag wireframe](Screenshots/New_Page_Parse.png)
-![tag wireframe](Screenshots/Sam_Page_Parse.png)
+![tag wireframe](screenshots/New_Page_Parse.png)
+![tag wireframe](screenshots/Sam_Page_Parse.png)
 
 ### Architecture and Technologies
 The project will utilize a couple of music-related javascript libraries to help out with the music logic behind the application.
