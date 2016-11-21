@@ -9,7 +9,7 @@ chord chart is the most succinct way to communicate the structure of a song.
 However, it is difficult to keep switching between a chord chart and
 the actual finger positions of a chord, especially if you're trying to learn
 a song as fast as possible. This app aims to bridge this information gap
-by keeping everything in one page.
+by keeping everything on one page.
 
 ## Functionality & MVP  
 
@@ -72,3 +72,4 @@ Otherwise, this will be purely JavaScript, HTML, and CSS.
 - [ ] Save chord charts in the cloud so the user can take their chord charts with them.
 - [ ] Option to switch chord voicings on a chord-by-chord basis, potentially dynamically altering the positions of the other chords
 - [ ] Recommended notes to improvise with over each chord
+- [ ] Group by chord characteristics (open chord, drop 2, triad)

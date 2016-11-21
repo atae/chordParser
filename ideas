@@ -1,0 +1,48 @@
+Potential State for Chord Object
+
+Find note on each string
+
+noteOrder = [C, [C#,Db], D, [D#,Eb], E, F, [F#,Gb], G, [G#,Ab], A, [A#,Bb], B]
+length: 11
+if 12, go to 0
+
+6thStringRootFormulas = {
+major: [1,5,1,3,5,1],
+minor: [1,5,1,b3,5,1],
+dim: [],
+major7: [1,x, ]
+}
+
+5thStringRootFormulas = {
+major: [x,1,5,1,3,1],
+}
+
+if / chord, find chord, change bass, find formula for finger awkwardness
+
+starting_indices = {
+E: 4
+B: 12
+G: 7
+D: 2
+A: 9
+E: 4
+}
+
+String: Chord Degree OR note_distance
+(1-3-5) or (1 - 4 - 7)
+
+major_chord = {
+  E:1
+  B:5
+  G:3
+  D:1
+  A:5
+  E:1
+  Chord Spelling:
+}
+
+minor_chord
+
+
+Parsing
+split by |, then split by spaces, then remove all empty values

@@ -1,0 +1,30 @@
+{
+  "name": "ChordParser",
+  "version": "1.0.0",
+  "description": "### Background Chord Parser is a chrome extension designed to make it easier for guitarists to figure out chord charts.",
+  "main": "parser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atae/chordParser.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atae/chordParser/issues"
+  },
+  "homepage": "https://github.com/atae/chordParser#readme",
+  "dependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "json-loader": "^0.5.4",
+    "sanitize-html": "^1.13.0",
+    "tonal": "^0.66.0",
+    "underscore": "^1.8.3",
+    "webpack": "^1.13.3"
+  }
+}
