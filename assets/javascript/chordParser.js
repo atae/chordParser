@@ -57,13 +57,15 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// import $ from 'jquery'
+	// import chordBox from './chord';
+	// import tabMaker from './tabMaker';
 	
 	document.addEventListener("DOMContentLoaded", function () {
 	  window.parser = _parser2.default;
 	  window.chordSpeller = _chordSpeller2.default;
 	
-	  $('.addChords').on('click', function () {
-	    // debugger
+	  var parseText = function parseText(e) {
+	    e.preventDefault();
 	    var chords = void 0;
 	    console.log(document.getElementsByClassName("chordString")[0].value);
 	    chords = (0, _parser2.default)('' + document.getElementsByClassName("chordString")[0].value);
@@ -71,11 +73,17 @@
 	    var i = void 0;
 	    $('.chords').replaceWith('<ul class="chords"></ul>');
 	    for (i in chords) {
-	      debugger;
+	      // debugger
 	      chord = (0, _chordSpeller2.default)(chords[i]);
-	      $('.chords').append('<li>' + chord + '</li>');
+	      $('.chords').append('<li>' + chords[i] + ': ' + chord + '</li>');
 	    }
-	  });
+	  };
+	  $('.chordStringForm').on('submit', parseText);
+	  // $('.addChords').on('keyDown', () => {
+	  //   if (e.key == "Enter") {
+	  //
+	  //   }
+	  // })
 	});
 	// import chordParser from './chordParser';
 
@@ -110,15 +118,19 @@
 	      chordLetters.push(parsed[i]);
 	    }
 	  }
-	
+	  // Need to cover C7#5, CM7#11
 	  //Parse by length vs. actualChordName
 	  var chordSized = [];
-	  var chordQualities = ['m', 'M', '+', 'ø', '/'];
-	  var twoLetterChordQualities = ['di, au'];
+	  var chordQualities = ['m', 'M', '+', 'ø', '/', '1'];
+	  var twoLetterChordQualities = ['di', 'au'];
 	  var j = void 0;
 	  for (j in chordLetters) {
-	    if (chordLetters[j].length <= 2 || chordLetters[j].length > 2 && chordQualities.includes(chordLetters[j][1]) || chordLetters[j].length > 3 && twoLetterChordQualities.includes(chordLetters[j].slice(1, 3))) {
-	      chordSized.push(chordLetters[j]);
+	    var check = chordLetters[j][2] == '#' || chordLetters[j][2] == 'b' ? 0 : 1;
+	    if (chordLetters[j].length <= 2 + check || chordLetters[j].length > 2 + check && chordQualities.includes(chordLetters[j][1 + check]) || chordLetters[j].length > 3 + check && twoLetterChordQualities.includes(chordLetters[j].slice(1 + check, 3 + check))) {
+	      debugger;
+	      if (chordLetters[j][chordLetters[j].length - 1] == '1' && chordLetters[j][chordLetters[j].length - 2] != '1') {} else {
+	        chordSized.push(chordLetters[j]);
+	      }
 	    }
 	    //remove any sequential alphabets from page Indexes
 	    if (chordLetters[j] === "G" && chordSized[0] === "A" && chordSized[1] === "B" && chordSized[2] === "C") {
