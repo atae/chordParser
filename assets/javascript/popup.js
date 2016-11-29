@@ -3,7 +3,7 @@ import parser from './parser';
 import chordSpeller from './chordSpeller';
 // import $ from 'jquery'
 // import chordBox from './chord';
-// import tabMaker from './tabMaker';
+import tabMaker from './tabMaker';
 
 document.addEventListener("DOMContentLoaded", () => {
   window.parser = parser;
@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
     for (i in chords) {
       // debugger
       chord = chordSpeller(chords[i])
+      // $('.tabs').append(`<li>${chordBox([[4,1]])}</li>`)
+      $('.tabs').append(`<li>${tabMaker(chord)}</li>`)
       $('.chords').append(`<li>${chords[i]}: ${chord}</li>`)
     }
   }
