@@ -1,9 +1,9 @@
 var json = require("json-loader");
 
 module.exports = {
-  entry: './assets/parser.js',
+  entry: './assets/javascript/popup.js',
   output: {
-    path: './assets',
+    path: './assets/javascript',
     filename: 'chordParser.js',
   },
   module: {

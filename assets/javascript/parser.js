@@ -35,5 +35,4 @@ function parser(text, all) {
 
 }
 
-window.parser = parser;
-window.chordSpeller = chordSpeller
+export default parser
