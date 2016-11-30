@@ -54,7 +54,7 @@
 	
 	var _chordSpeller2 = _interopRequireDefault(_chordSpeller);
 	
-	var _tabMaker = __webpack_require__(32);
+	var _tabMaker = __webpack_require__(30);
 	
 	var _tabMaker2 = _interopRequireDefault(_tabMaker);
 	
@@ -70,16 +70,51 @@
 	    var chords = void 0;
 	    console.log(document.getElementsByClassName("chordString")[0].value);
 	    chords = (0, _parser2.default)('' + document.getElementsByClassName("chordString")[0].value);
-	    var chord = void 0;
+	    // let chord;
 	    var i = void 0;
 	    $('.chords').replaceWith('<ul class="chords"></ul>');
+	    $('.tabs').replaceWith('<ul class="tabs"></ul>');
+	    var line1 = [];
+	    var line2 = [];
+	    var line3 = [];
+	    var line4 = [];
+	    var line5 = [];
+	    var line6 = [];
+	    var line7 = [];
 	    for (i in chords) {
 	      // debugger
-	      chord = (0, _chordSpeller2.default)(chords[i]);
 	      // $('.tabs').append(`<li>${chordBox([[4,1]])}</li>`)
-	      $('.tabs').append('<li>' + (0, _tabMaker2.default)(chord) + '</li>');
-	      $('.chords').append('<li>' + chords[i] + ': ' + chord + '</li>');
+	      var chord = (0, _chordSpeller2.default)(chords[i]);
+	      if (chord.length === 0) {} else {
+	        var tabs = (0, _tabMaker2.default)(chord);
+	        // $('.tabs').append(`<li>${tabMaker(chord)}</li>`)
+	        var dashes = "--";
+	        var spaces = " ";
+	        // for (var j = 0; j < chords[i].length; j++) {
+	        //     dashes += "--"
+	        //     // if (i % 3 == 0) {
+	        //       spaces += " "
+	        //     // }
+	        // }
+	
+	        line1.push('' + dashes + tabs[0] + dashes);
+	        line2.push('' + dashes + tabs[1] + dashes);
+	        line3.push('' + dashes + tabs[2] + dashes);
+	        line4.push('' + dashes + tabs[3] + dashes);
+	        line5.push('' + dashes + tabs[4] + dashes);
+	        line6.push('' + dashes + tabs[5] + dashes);
+	        // line7.push(`${spaces}${chords[i]}${spaces}`)
+	        $('.chords').append('<li>' + chords[i] + ': ' + chord + '</li>');
+	      }
 	    }
+	    $('.tabs').append('<li>' + line1.join('') + '</li>');
+	    $('.tabs').append('<li>' + line2.join('') + '</li>');
+	    $('.tabs').append('<li>' + line3.join('') + '</li>');
+	    $('.tabs').append('<li>' + line4.join('') + '</li>');
+	    $('.tabs').append('<li>' + line5.join('') + '</li>');
+	    $('.tabs').append('<li>' + line6.join('') + '</li>');
+	    // $('.tabs').append(`<li>${line7.join('|')}</li>`)
+	
 	  };
 	  $('.chordStringForm').on('submit', parseText);
 	  // $('.addChords').on('keyDown', () => {
@@ -5578,9 +5613,7 @@
 	exports.density = density;
 
 /***/ },
-/* 30 */,
-/* 31 */,
-/* 32 */
+/* 30 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -5604,43 +5637,77 @@
 	    LE: 4
 	  };
 	  var tabs = {
-	    HE: "",
-	    B: "",
-	    G: "",
-	    D: "",
-	    A: "",
-	    LE: ""
+	    HE: "X",
+	    B: "X",
+	    G: "X",
+	    D: "X",
+	    A: "X",
+	    LE: "X"
 	  };
-	  var noteOrder = ['C', 'C/D', 'D', 'D/E', 'E', 'F', 'F/G', 'G', 'G/A', 'A', 'A/B', 'B'];
+	  var noteOrder = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 	  debugger;
 	  var parsed_notes = chordSpelling;
-	  for (var i = 0; i < chordSpelling.length; i++) {
-	    if (chordSpelling[i] == "C#" || chordSpelling[i] == "Db") {
-	      chordSpelling[i] = 'C/D';
-	    } else if (chordSpelling[i] == "D#" || chordSpelling[i] == "Eb") {
-	      chordSpelling[i] = 'D/E';
-	    } else if (chordSpelling[i] == "F#" || chordSpelling[i] == "Gb") {
-	      chordSpelling[i] = 'F/G';
-	    } else if (chordSpelling[i] == "G#" || chordSpelling[i] == "Ab") {
-	      chordSpelling[i] = 'G/A';
-	    } else if (chordSpelling[i] == "A#" || chordSpelling[i] == "Bb") {
-	      chordSpelling[i] = 'A/B';
+	  for (var i = 0; i < parsed_notes.length; i++) {
+	    if (parsed_notes[i] == "C#" || parsed_notes[i] == "Db") {
+	      parsed_notes[i] = 'C#';
+	    } else if (parsed_notes[i] == "D#" || parsed_notes[i] == "Eb") {
+	      parsed_notes[i] = 'D#';
+	    } else if (parsed_notes[i] == "F#" || parsed_notes[i] == "Gb") {
+	      parsed_notes[i] = 'F#';
+	    } else if (parsed_notes[i] == "G#" || parsed_notes[i] == "Ab") {
+	      parsed_notes[i] = 'G#';
+	    } else if (parsed_notes[i] == "A#" || parsed_notes[i] == "Bb") {
+	      parsed_notes[i] = 'A#';
 	    }
 	  }
 	
-	  //Creating 6th String Chord
 	  var strings = Object.keys(tabs);
-	  for (var _i = 0; _i < chordSpelling.length; _i++) {
-	    var notePosition = noteOrder.indexOf(chordSpelling[_i]);
-	    if (_i == 0) {
-	      tabs['LE'] = mod(notePosition - starting_indices['LE'], 12);
-	      tabs['HE'] = mod(notePosition - starting_indices['HE'], 12);
-	      tabs['D'] = mod(notePosition - starting_indices['D'], 12);
-	    } else if (_i == 1) {
-	      tabs['G'] = mod(notePosition - starting_indices['G'], 12);
-	    } else if (_i == 2) {
-	      tabs['A'] = mod(notePosition - starting_indices['A'], 12);
-	      tabs['B'] = mod(notePosition - starting_indices['B'], 12);
+	  //Creating 6th String Chord
+	  //Keep notes within a range of 3 frets
+	  console.log(noteOrder.slice(4, 10));
+	  console.log(parsed_notes[0]);
+	  if (noteOrder.slice(4, 10).includes(parsed_notes[0])) {
+	    for (var _i = 0; _i < parsed_notes.length; _i++) {
+	      var notePosition = noteOrder.indexOf(parsed_notes[_i]);
+	      if (_i == 0) {
+	        tabs['LE'] = mod(notePosition - starting_indices['LE'], 12);
+	        tabs['HE'] = mod(notePosition - starting_indices['HE'], 12);
+	        tabs['D'] = mod(notePosition - starting_indices['D'], 12);
+	      } else if (_i == 1) {
+	        tabs['G'] = mod(notePosition - starting_indices['G'], 12);
+	      } else if (_i == 2) {
+	        tabs['A'] = mod(notePosition - starting_indices['A'], 12);
+	        tabs['B'] = mod(notePosition - starting_indices['B'], 12);
+	      } else if (_i == 3) {
+	        debugger;
+	        if (mod(notePosition - noteOrder.indexOf(parsed_notes[0]), 12) == 10) {
+	          tabs['D'] = mod(tabs['D'] - 2, 12);
+	        } else if (mod(notePosition - noteOrder.indexOf(parsed_notes[0]), 12) == 11) {
+	          tabs['A'] = 'X';
+	          tabs['D'] = mod(tabs['D'] - 1, 12);
+	          tabs['HE'] = 'X';
+	        }
+	      }
+	    }
+	  } else {
+	    for (var _i2 = 0; _i2 < parsed_notes.length; _i2++) {
+	      var _notePosition = noteOrder.indexOf(parsed_notes[_i2]);
+	      if (_i2 == 0) {
+	        tabs['A'] = mod(_notePosition - starting_indices['A'], 12);
+	        tabs['G'] = mod(_notePosition - starting_indices['G'], 12);
+	      } else if (_i2 == 1) {
+	        tabs['B'] = mod(_notePosition - starting_indices['B'], 12);
+	      } else if (_i2 == 2) {
+	        tabs['HE'] = mod(_notePosition - starting_indices['HE'], 12);
+	        tabs['D'] = mod(_notePosition - starting_indices['D'], 12);
+	      } else if (_i2 == 3) {
+	        // debugger
+	        if (mod(_notePosition - noteOrder.indexOf(parsed_notes[0]), 12) == 10) {
+	          tabs['G'] = mod(tabs['G'] - 2, 12);
+	        } else if (mod(_notePosition - noteOrder.indexOf(parsed_notes[0]), 12) == 11) {
+	          tabs['G'] = mod(tabs['G'] - 1, 12);
+	        }
+	      }
 	    }
 	  }
 	

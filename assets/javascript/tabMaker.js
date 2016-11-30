@@ -14,46 +14,81 @@ function tabMaker(chordSpelling) {
     LE: 4
   }
   let tabs = {
-    HE: "",
-    B: "",
-    G: "",
-    D: "",
-    A: "",
-    LE: ""
+    HE: "X",
+    B: "X",
+    G: "X",
+    D: "X",
+    A: "X",
+    LE: "X"
   }
-  let noteOrder = ['C', 'C/D' , 'D', 'D/E', 'E', 'F', 'F/G', 'G', 'G/A', 'A', 'A/B', 'B']
+  let noteOrder = ['C', 'C#' , 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
   debugger
   let parsed_notes = chordSpelling
-  for (let i = 0; i < chordSpelling.length; i++) {
-    if (chordSpelling[i] == "C#" || chordSpelling[i] == "Db") {
-      chordSpelling[i] = 'C/D'
-    } else if (chordSpelling[i] == "D#" || chordSpelling[i] == "Eb" ){
-      chordSpelling[i] = 'D/E'
-    } else if (chordSpelling[i] == "F#" || chordSpelling[i] == "Gb") {
-      chordSpelling[i] = 'F/G'
-    } else if (chordSpelling[i] == "G#" || chordSpelling[i] == "Ab") {
-      chordSpelling[i] = 'G/A'
-    } else if (chordSpelling[i] == "A#" || chordSpelling[i] == "Bb") {
-      chordSpelling[i] = 'A/B'
+  for (let i = 0; i < parsed_notes.length; i++) {
+    if (parsed_notes[i] == "C#" || parsed_notes[i] == "Db") {
+      parsed_notes[i] = 'C#'
+    } else if (parsed_notes[i] == "D#" || parsed_notes[i] == "Eb" ){
+      parsed_notes[i] = 'D#'
+    } else if (parsed_notes[i] == "F#" || parsed_notes[i] == "Gb") {
+      parsed_notes[i] = 'F#'
+    } else if (parsed_notes[i] == "G#" || parsed_notes[i] == "Ab") {
+      parsed_notes[i] = 'G#'
+    } else if (parsed_notes[i] == "A#" || parsed_notes[i] == "Bb") {
+      parsed_notes[i] = 'A#'
     }
   }
 
-  //Creating 6th String Chord
   let strings = Object.keys(tabs)
-  for (let i = 0; i < chordSpelling.length; i++) {
-    let notePosition = noteOrder.indexOf(chordSpelling[i])
+  //Creating 6th String Chord
+  //Keep notes within a range of 3 frets
+  console.log(noteOrder.slice(4,10));
+  console.log(parsed_notes[0]);
+  if (noteOrder.slice(4, 10).includes(parsed_notes[0])) {
+    for (let i = 0; i < parsed_notes.length; i++) {
+      let notePosition = noteOrder.indexOf(parsed_notes[i])
+        if (i == 0) {
+          tabs['LE'] = mod((notePosition - starting_indices['LE']), 12)
+          tabs['HE'] = mod((notePosition - starting_indices['HE']), 12)
+          tabs['D'] = mod((notePosition - starting_indices['D']), 12)
+        } else if (i == 1) {
+          tabs['G'] = mod((notePosition - starting_indices['G']), 12)
+        } else if (i == 2) {
+          tabs['A'] = mod((notePosition - starting_indices['A']), 12)
+          tabs['B'] = mod((notePosition - starting_indices['B']), 12)
+        } else if (i == 3) {
+          debugger
+          if (mod((notePosition - noteOrder.indexOf(parsed_notes[0])),12) == 10 ){
+            tabs['D'] = mod((tabs['D'] - 2), 12)
+          } else if (mod((notePosition - noteOrder.indexOf(parsed_notes[0])),12) == 11){
+            tabs['A'] = 'X'
+            tabs['D'] = mod((tabs['D'] - 1), 12)
+            tabs['HE'] = 'X'
+          }
+        }
+
+
+    }
+  } else {
+    for (let i = 0; i < parsed_notes.length; i++) {
+    let notePosition = noteOrder.indexOf(parsed_notes[i])
       if (i == 0) {
-        tabs['LE'] = mod((notePosition - starting_indices['LE']), 12)
+        tabs['A'] = mod((notePosition - starting_indices['A']), 12)
+        tabs['G'] = mod((notePosition - starting_indices['G']), 12)
+      } else if (i == 1) {
+        tabs['B'] = mod((notePosition - starting_indices['B']), 12)
+      } else if (i == 2) {
         tabs['HE'] = mod((notePosition - starting_indices['HE']), 12)
         tabs['D'] = mod((notePosition - starting_indices['D']), 12)
-      } else if (i == 1) {
-        tabs['G'] = mod((notePosition - starting_indices['G']), 12)
-      } else if (i == 2) {
-        tabs['A'] = mod((notePosition - starting_indices['A']), 12)
-        tabs['B'] = mod((notePosition - starting_indices['B']), 12)
-      }
+      } else if (i == 3) {
+        // debugger
+        if (mod((notePosition - noteOrder.indexOf(parsed_notes[0])),12) == 10 ){
+          tabs['G'] = mod((tabs['G'] - 2), 12)
+        } else if (mod((notePosition - noteOrder.indexOf(parsed_notes[0])),12) == 11){
+          tabs['G'] = mod((tabs['G'] - 1), 12)
+        }
+    }
   }
-
+  }
 
 
   return Object.values(tabs)

@@ -2,3 +2,8 @@ body{
    width:500px;
    height:500px;
 }
+
+.tabs li{
+  display:flex;
+  justify-content: center;
+}
