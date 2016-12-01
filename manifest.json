@@ -21,6 +21,9 @@
       "mac": "Command+Shift+Comma"
     }, "description": "Open Window"
     }
+  },
+  "background": {
+    "scripts":["./assets/javascript/background.js"]
   }
 
 }

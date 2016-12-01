@@ -65,8 +65,6 @@ function tabMaker(chordSpelling) {
             tabs['HE'] = 'X'
           }
         }
-
-
     }
   } else {
     for (let i = 0; i < parsed_notes.length; i++) {
@@ -89,7 +87,44 @@ function tabMaker(chordSpelling) {
     }
   }
   }
+  //parse 9th chords (this also hits M7#11)
+  if (parsed_notes.length === 5) {
+    tabs['HE'] = 'X'
+    tabs['LE'] = 'X'
+    for (let i = 0; i < parsed_notes.length; i++) {
+    let notePosition = noteOrder.indexOf(parsed_notes[i])
+      if (i == 0) {
+        tabs['A'] = mod((notePosition - starting_indices['A']), 12)
 
+        tabs['G'] = mod((notePosition - starting_indices['G']), 12)
+      } else if (i == 1) {
+        tabs['D'] = mod((notePosition - starting_indices['D']), 12)
+      } else if (i == 3) {
+        // debugger
+        if (mod((notePosition - noteOrder.indexOf(parsed_notes[0])),12) == 10 ){
+          tabs['G'] = mod((tabs['G'] - 2), 12)
+        } else if (mod((notePosition - noteOrder.indexOf(parsed_notes[0])),12) == 11){
+          tabs['G'] = mod((tabs['G'] - 1), 12)
+        }
+    } else if (i == 4) {
+      tabs['B'] = mod((notePosition - starting_indices['B']), 12)
+    }
+    }
+    //Fix for A9 and Bb9
+    if (tabs['A'] == 0) {
+      tabs['A'] = 12 - tabs['A']
+      tabs['G'] = 12 - tabs['G']
+      tabs['B'] = 12 - tabs['B']
+    } else if (tabs['A'] == 1){
+      tabs['A'] = 13
+      tabs['G'] = 13
+      tabs['B'] = 13
+    }
+  }
+
+  //parse 11th
+
+  //parse 13th
 
   return Object.values(tabs)
   //6th string if

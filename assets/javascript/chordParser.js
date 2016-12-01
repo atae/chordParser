@@ -74,47 +74,70 @@
 	    var i = void 0;
 	    $('.chords').replaceWith('<ul class="chords"></ul>');
 	    $('.tabs').replaceWith('<ul class="tabs"></ul>');
-	    var line1 = [];
-	    var line2 = [];
-	    var line3 = [];
-	    var line4 = [];
-	    var line5 = [];
-	    var line6 = [];
-	    var line7 = [];
+	
+	    var lines = {
+	      1: [['E--'], ['B--'], ['G--'], ['D--'], ['A--'], ['E--']],
+	      2: [['E--'], ['B--'], ['G--'], ['D--'], ['A--'], ['E--']],
+	      3: [['E--'], ['B--'], ['G--'], ['D--'], ['A--'], ['E--']]
+	    };
+	    // let lines2 = [['E'],['B'],['G'],['D'],['A'],['E']]
+	    // let lines3 = [['E'],['B'],['G'],['D'],['A'],['E']]
+	    var line_num = 1;
 	    for (i in chords) {
 	      // debugger
 	      // $('.tabs').append(`<li>${chordBox([[4,1]])}</li>`)
 	      var chord = (0, _chordSpeller2.default)(chords[i]);
 	      if (chord.length === 0) {} else {
 	        var tabs = (0, _tabMaker2.default)(chord);
-	        // $('.tabs').append(`<li>${tabMaker(chord)}</li>`)
-	        var dashes = "--";
-	        var spaces = " ";
-	        // for (var j = 0; j < chords[i].length; j++) {
-	        //     dashes += "--"
-	        //     // if (i % 3 == 0) {
-	        //       spaces += " "
-	        //     // }
-	        // }
 	
-	        line1.push('' + dashes + tabs[0] + dashes);
-	        line2.push('' + dashes + tabs[1] + dashes);
-	        line3.push('' + dashes + tabs[2] + dashes);
-	        line4.push('' + dashes + tabs[3] + dashes);
-	        line5.push('' + dashes + tabs[4] + dashes);
-	        line6.push('' + dashes + tabs[5] + dashes);
-	        // line7.push(`${spaces}${chords[i]}${spaces}`)
-	        $('.chords').append('<li>' + chords[i] + ': ' + chord + '</li>');
+	        var spaces = " ";
+	
+	        var maxlen = 0;
+	        for (var m = 0; m < tabs.length; m++) {
+	          if ((tabs[m] + "").length > maxlen) {
+	            maxlen = (tabs[m] + "").length;
+	          }
+	        }
+	        for (var j = 0; j < tabs.length; j++) {
+	          console.log(maxlen);
+	          var dashes = "---";
+	          // (maxlen == 2) ? "-" :
+	          // if (tabs[j].length == 1) {
+	          //   dashes += "-"
+	          // }
+	
+	          // lines[j].push(`<span class=${chords[i]}>${tabs[j]}</span>${dashes}`)
+	
+	          // } else {
+	
+	          if (lines[line_num + ""][j].length % 8 == 0) {
+	            line_num += 1;
+	          }
+	
+	          if (tabs[j] == "X" && maxlen == 2) {
+	            lines[line_num][j].push('----');
+	          } else if ((tabs[j] + "").length == 2) {
+	            lines[line_num][j].push('<span class=\'chord' + i + '\'\'>' + tabs[j] + '</span>--');
+	          } else {
+	            lines[line_num][j].push('<span class=\'chord' + i + '\'\'>' + tabs[j] + '</span>' + dashes);
+	          }
+	        }
+	
+	        $('.chords').append('<li class=\'chord' + i + '\'>' + chords[i] + ': ' + chord + '</li>');
 	      }
 	    }
-	    $('.tabs').append('<li>' + line1.join('') + '</li>');
-	    $('.tabs').append('<li>' + line2.join('') + '</li>');
-	    $('.tabs').append('<li>' + line3.join('') + '</li>');
-	    $('.tabs').append('<li>' + line4.join('') + '</li>');
-	    $('.tabs').append('<li>' + line5.join('') + '</li>');
-	    $('.tabs').append('<li>' + line6.join('') + '</li>');
-	    // $('.tabs').append(`<li>${line7.join('|')}</li>`)
 	
+	    debugger;
+	    for (var l = 1; l < 4; l++) {
+	      if (lines[l][0].length >= 2) {
+	        for (var k = 0; k < lines[l].length; k++) {
+	          $('.tabs').append('<li>' + lines[l][k].join('') + '</li>');
+	        }
+	      }
+	      $('.tabs').append('<br/>');
+	    }
+	
+	    console.log(lines);
 	  };
 	  $('.chordStringForm').on('submit', parseText);
 	  // $('.addChords').on('keyDown', () => {
@@ -161,17 +184,22 @@
 	  //Parse by length vs. actualChordName
 	  var chordSized = [];
 	  var chordQualities = ['m', 'M', '+', 'ø', '/', '1'];
-	  var twoLetterChordQualities = ['di', 'au'];
+	  var twoLetterChordQualities = ['di', 'au', 'mi', 'ma'];
 	  var j = void 0;
 	  for (j in chordLetters) {
-	    var check = chordLetters[j][2] == '#' || chordLetters[j][2] == 'b' ? 0 : 1;
+	    var check = chordLetters[j][1] == '#' || chordLetters[j][1] == 'b' ? 1 : 2;
+	    // let check = 0;
+	    debugger;
 	    if (chordLetters[j].length <= 2 + check || chordLetters[j].length > 2 + check && chordQualities.includes(chordLetters[j][1 + check]) || chordLetters[j].length > 3 + check && twoLetterChordQualities.includes(chordLetters[j].slice(1 + check, 3 + check))) {
-	      debugger;
 	      if (chordLetters[j][chordLetters[j].length - 1] == '1' && chordLetters[j][chordLetters[j].length - 2] != '1') {} else {
 	        chordSized.push(chordLetters[j]);
 	      }
 	    }
-	    //remove any sequential alphabets from page Indexes
+	
+	    if (chordLetters[j].includes("maj") || chordLetters[j].includes("min")) {
+	      chordSized.push(chordLetters[j]);
+	    }
+	
 	    if (chordLetters[j] === "G" && chordSized[0] === "A" && chordSized[1] === "B" && chordSized[2] === "C") {
 	      chordSized = [];
 	    }
@@ -5710,6 +5738,44 @@
 	      }
 	    }
 	  }
+	  //parse 9th chords (this also hits M7#11)
+	  if (parsed_notes.length === 5) {
+	    tabs['HE'] = 'X';
+	    tabs['LE'] = 'X';
+	    for (var _i3 = 0; _i3 < parsed_notes.length; _i3++) {
+	      var _notePosition2 = noteOrder.indexOf(parsed_notes[_i3]);
+	      if (_i3 == 0) {
+	        tabs['A'] = mod(_notePosition2 - starting_indices['A'], 12);
+	
+	        tabs['G'] = mod(_notePosition2 - starting_indices['G'], 12);
+	      } else if (_i3 == 1) {
+	        tabs['D'] = mod(_notePosition2 - starting_indices['D'], 12);
+	      } else if (_i3 == 3) {
+	        // debugger
+	        if (mod(_notePosition2 - noteOrder.indexOf(parsed_notes[0]), 12) == 10) {
+	          tabs['G'] = mod(tabs['G'] - 2, 12);
+	        } else if (mod(_notePosition2 - noteOrder.indexOf(parsed_notes[0]), 12) == 11) {
+	          tabs['G'] = mod(tabs['G'] - 1, 12);
+	        }
+	      } else if (_i3 == 4) {
+	        tabs['B'] = mod(_notePosition2 - starting_indices['B'], 12);
+	      }
+	    }
+	    //Fix for A9 and Bb9
+	    if (tabs['A'] == 0) {
+	      tabs['A'] = 12 - tabs['A'];
+	      tabs['G'] = 12 - tabs['G'];
+	      tabs['B'] = 12 - tabs['B'];
+	    } else if (tabs['A'] == 1) {
+	      tabs['A'] = 13;
+	      tabs['G'] = 13;
+	      tabs['B'] = 13;
+	    }
+	  }
+	
+	  //parse 11th
+	
+	  //parse 13th
 	
 	  return Object.values(tabs);
 	  //6th string if

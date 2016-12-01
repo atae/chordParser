@@ -3,20 +3,32 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="./assets/css/popup.css" media="screen" title="no title">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="./assets/javascript/chordParser.js" type="text/javascript">
     </script>
     <title></title>
   </head>
   <body>
-    <h1>Enter Chords to Parse</h1>
+    <header class="input">
+    <h1>ChordParser</h1>
     <form class="chordStringForm">
-      <input type="text" class="chordString" />
+      <input type="text" class="chordString" value="C AM7 Gm E7 Dm9"/>
       <button class="addChords">Add Chords</button>
     </form>
-    <ul class="tabs">
-    </ul>
-    <ul class="chords">
-    </ul>
+
+    <br/>
+    <br/>
+  </header>
+    <!-- <hr> -->
+    <br/>
+    <div class="output">
+      <ul class="tabs">
+      </ul>
+      <ul class="chords">
+      </ul>
+    </div>
+
+
   </body>
 </html>

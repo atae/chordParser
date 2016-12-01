@@ -1,9 +1,81 @@
+/** {
+  border: 1px solid red;
+}*/
 body{
-   width:500px;
-   height:500px;
+   width:600px;
+   height:300px;
+   /*display:flex;*/
+   text-align: center;
+   /*justify-content: center;*/
+   /*border: 1px solid red;*/
+   /*font: 16px;*/
+   font-family: 'Open Sans', sans-serif;
+   color: #16a085;
+   margin: 0;
+   padding: 0;
+   background-color: white;
 }
 
+.input {
+  /*background-color: ;*/
+  background-color:
+}
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 7px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+
+.tabs{
+  margin: 0;
+  padding: 0;
+  display:flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
 .tabs li{
+  /*display:float;*/
+  display: flex;
+  justify-content: flex-start;
+  list-style:none;
+  color: #000;
+  font: 16px monospace;
+  white-space: pre;
+  /*word-break: break-all;*/
+
+}
+.output {
   display:flex;
   justify-content: center;
+  background-color: white;
+  /*flex-direction: column;*/
 }
+
+.chords {
+  /*font: 220px;*/
+  margin-top: -3px;
+  margin-bottom: 10px;
+  list-style: none;
+}
+.chords li{
+  font:22px;
+  margin: 5px;
+}
+
+.chord{
+  /*font: 22px;*/
+  color:black;
+}
+
+/*li[class^='chord']:hover, span[class*='chord']{
+    color: red;
+}
+
+span[class^='chord']:hover, li[class*='chord']{
+    color: red;
+}*/

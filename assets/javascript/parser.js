@@ -16,18 +16,24 @@ function parser(text, all) {
   //Parse by length vs. actualChordName
   let chordSized = []
   let chordQualities = ['m', 'M', '+', 'ø', '/', '1']
-  let twoLetterChordQualities = ['di', 'au']
+  let twoLetterChordQualities = ['di', 'au', 'mi', 'ma']
   let j;
   for (j in chordLetters) {
-    let check = (chordLetters[j][2] == '#' || chordLetters[j][2] == 'b') ? 0 : 1
+    let check = (chordLetters[j][1] == '#' || chordLetters[j][1] == 'b') ? 1 : 2
+    // let check = 0;
+    debugger
     if (chordLetters[j].length <= 2 + check ||(chordLetters[j].length > 2 + check && chordQualities.includes(chordLetters[j][1 + check]))|| (chordLetters[j].length > 3 + check && twoLetterChordQualities.includes(chordLetters[j].slice(1+check,3+check)))) {
-      debugger
       if (chordLetters[j][chordLetters[j].length-1] == '1' && chordLetters[j][chordLetters[j].length-2] != '1') {
       } else {
       chordSized.push(chordLetters[j])
       }
     }
-    //remove any sequential alphabets from page Indexes
+
+    if (chordLetters[j].includes("maj") || (chordLetters[j].includes("min"))){
+      chordSized.push(chordLetters[j])
+    }
+
+
     if (chordLetters[j] === "G" && chordSized[0] === "A" && chordSized[1] === "B" && chordSized[2] === "C"){
       chordSized = [];
     }
