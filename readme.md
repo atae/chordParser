@@ -18,6 +18,7 @@ This project uses the following technologies:
   This logic was created to take in any user input and only create output if there are valid inputs in the text. Due to the nature of music's limited alphabet, a lot of the work is already cut out for me in terms of filtering out non-musical input.
 
   ![tag screenshot](screenshots/Musical_Alphabet.png)
+  
     In this screenshot, we are filtering the text down to any block of text that begins with a musical alphabet. This shuts out a lot of extraneous input.
 
   ![tag screenshot](screenshots/Chord_Conditions.png)
