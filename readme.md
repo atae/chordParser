@@ -8,10 +8,10 @@ Chord Parser is the ultimate tool for guitarists who are learning to read chord 
   Enter a set of chord names or copy and paste a whole text file with chord names in it. Chord Parser will pull out chord names and return tablature for each chord along with the spelling of each chord.
 
   This extension can take in a series of chords separated by spaces
-  ![tag screenshot](screenshots/Short_Input.png)
+  ![tag screenshot](screenshots/Short Input.png)
 
   This extension can also take in a large body of text (such as all the selected text from a webpage)
-  ![tag screenshot](screenshots/Long_Input.png)
+  ![tag screenshot](screenshots/Long Input.png)
 
 
 ##Technologies and Technical Features
