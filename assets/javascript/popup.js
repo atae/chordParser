@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const parseText = (e) => {
     e.preventDefault()
+    $('.welcome').remove();
     let chords;
     console.log(document.getElementsByClassName("chordString")[0].value);
     chords = parser(`${document.getElementsByClassName("chordString")[0].value}`)
@@ -64,18 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (tabs[j] == "X" && maxlen == 2) {
           lines[line_num][j].push(`----`)
         } else if ((tabs[j]+"").length == 2) {
-          lines[line_num][j].push(`<span class='${i}''>${tabs[j]}</span>--`)
+          lines[line_num][j].push(`<span class='tab${i}''>${tabs[j]}</span>--`)
         } else {
-          lines[line_num][j].push(`<span class='${i}''>${tabs[j]}</span>${dashes}`)
+          lines[line_num][j].push(`<span class='tab${i}''>${tabs[j]}</span>${dashes}`)
 
         }
       }
 
-      setTimeout(()=>{$(`.${i}`).hover(() => {
-        $(`.${i}`).css("background-color", "yellow");
-      }, ()=>{
-        $(`.${i}`).css("background-color", "white");
-      })},100)
       // var li = document.createElement('li');
       // li.className = `${i}`; // Class name
       // li.innerHTML = `${chords[i]}: ${}` // Text inside
@@ -84,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // li.onmouseout = unhighlight;
       $('.chords').append(`<li class='${i}'>${chords[i]}: ${chord}</li>`)
       // console.log($(`.${i}`));
+      // )
       // currChord = ``
     function highlight() {
           //stuff to do on mouse enter
@@ -124,9 +121,19 @@ document.addEventListener("DOMContentLoaded", () => {
     //   $(`.chord1`).css("background-color", "white");
     // })
     // console.log(lines);
+    // Highlight
+    // let m
+    // for (m in chords) {
+    //   setTimeout(()=>{$(`.${m}`).hover(function () {
+    //     $(`.${m}`).css("background-color", "yellow");
+    //     $(`.tab${m}`).css("background-color", "yellow");
+    //   }, function() {
+    //     $(`.${m}`).css("background-color", "white");
+    //     $(`.tab${m}`).css("background-color", "white");
+    //
+    //   })},1000)
+  // }
   }
-
-
   $('.chordStringForm').on('submit', parseText)
   // $('.addChords').on('keyDown', () => {
   //   if (e.key == "Enter") {
