@@ -88,6 +88,18 @@
 	      // $('.tabs').append(`<li>${chordBox([[4,1]])}</li>`)
 	      var chord = (0, _chordSpeller2.default)(chords[i]);
 	      if (chord.length === 0) {} else {
+	        // console.log($(`.${i}`));
+	        // currChord = ``
+	        var highlight = function highlight() {
+	          //stuff to do on mouse enter
+	          $('.' + i).css("background-color", "yellow");
+	        };
+	
+	        var unhighlight = function unhighlight() {
+	
+	          $('.' + i).css("background-color", "white");
+	        };
+	
 	        var tabs = (0, _tabMaker2.default)(chord);
 	
 	        var spaces = " ";
@@ -117,17 +129,38 @@
 	          if (tabs[j] == "X" && maxlen == 2) {
 	            lines[line_num][j].push('----');
 	          } else if ((tabs[j] + "").length == 2) {
-	            lines[line_num][j].push('<span class=\'chord' + i + '\'\'>' + tabs[j] + '</span>--');
+	            lines[line_num][j].push('<span class=\'' + i + '\'\'>' + tabs[j] + '</span>--');
 	          } else {
-	            lines[line_num][j].push('<span class=\'chord' + i + '\'\'>' + tabs[j] + '</span>' + dashes);
+	            lines[line_num][j].push('<span class=\'' + i + '\'\'>' + tabs[j] + '</span>' + dashes);
 	          }
 	        }
 	
-	        $('.chords').append('<li class=\'chord' + i + '\'>' + chords[i] + ': ' + chord + '</li>');
+	        setTimeout(function () {
+	          $('.' + i).hover(function () {
+	            $('.' + i).css("background-color", "yellow");
+	          }, function () {
+	            $('.' + i).css("background-color", "white");
+	          });
+	        }, 100);
+	        // var li = document.createElement('li');
+	        // li.className = `${i}`; // Class name
+	        // li.innerHTML = `${chords[i]}: ${}` // Text inside
+	        // document.getElementsByClassName('chords')[0].appendChild(li); // Append it
+	        // li.onmouseover = highlight; // Attach the event!
+	        // li.onmouseout = unhighlight;
+	        $('.chords').append('<li class=\'' + i + '\'>' + chords[i] + ': ' + chord + '</li>');
 	      }
 	    }
 	
-	    debugger;
+	    //
+	    //
+	    // $("chord1").hover(() => {
+	    // }, ()=>{
+	    // })
+	
+	
+	    // document.getElementsByClassName('chord1')[6].addEventListener('onMouseEnter', highlight)
+	    // debugger
 	    for (var l = 1; l < 4; l++) {
 	      if (lines[l][0].length >= 2) {
 	        for (var k = 0; k < lines[l].length; k++) {
@@ -136,9 +169,15 @@
 	      }
 	      $('.tabs').append('<br/>');
 	    }
-	
-	    console.log(lines);
+	    //
+	    // $(`.chord1`).hover(() => {
+	    //   $(`.chord1`).css("background-color", "yellow");
+	    // }, ()=>{
+	    //   $(`.chord1`).css("background-color", "white");
+	    // })
+	    // console.log(lines);
 	  };
+	
 	  $('.chordStringForm').on('submit', parseText);
 	  // $('.addChords').on('keyDown', () => {
 	  //   if (e.key == "Enter") {

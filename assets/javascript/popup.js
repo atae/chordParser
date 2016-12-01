@@ -64,18 +64,51 @@ document.addEventListener("DOMContentLoaded", () => {
         if (tabs[j] == "X" && maxlen == 2) {
           lines[line_num][j].push(`----`)
         } else if ((tabs[j]+"").length == 2) {
-          lines[line_num][j].push(`<span class='chord${i}''>${tabs[j]}</span>--`)
+          lines[line_num][j].push(`<span class='${i}''>${tabs[j]}</span>--`)
         } else {
-          lines[line_num][j].push(`<span class='chord${i}''>${tabs[j]}</span>${dashes}`)
+          lines[line_num][j].push(`<span class='${i}''>${tabs[j]}</span>${dashes}`)
 
         }
       }
 
-      $('.chords').append(`<li class='chord${i}'>${chords[i]}: ${chord}</li>`)
+      setTimeout(()=>{$(`.${i}`).hover(() => {
+        $(`.${i}`).css("background-color", "yellow");
+      }, ()=>{
+        $(`.${i}`).css("background-color", "white");
+      })},100)
+      // var li = document.createElement('li');
+      // li.className = `${i}`; // Class name
+      // li.innerHTML = `${chords[i]}: ${}` // Text inside
+      // document.getElementsByClassName('chords')[0].appendChild(li); // Append it
+      // li.onmouseover = highlight; // Attach the event!
+      // li.onmouseout = unhighlight;
+      $('.chords').append(`<li class='${i}'>${chords[i]}: ${chord}</li>`)
+      // console.log($(`.${i}`));
+      // currChord = ``
+    function highlight() {
+          //stuff to do on mouse enter
+          $(`.${i}`).css("background-color", "yellow");
+
+      }
+
+      function unhighlight() {
+
+          $(`.${i}`).css("background-color", "white");
+        }
+
+
       }
     }
 
-    debugger
+    //
+    //
+    // $("chord1").hover(() => {
+    // }, ()=>{
+    // })
+
+
+    // document.getElementsByClassName('chord1')[6].addEventListener('onMouseEnter', highlight)
+    // debugger
     for (let l = 1; l < 4; l++ ) {
       if (lines[l][0].length >= 2) {
         for (var k = 0; k < lines[l].length; k++) {
@@ -84,9 +117,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       $('.tabs').append(`<br/>`)
     }
-
-    console.log(lines);
+    //
+    // $(`.chord1`).hover(() => {
+    //   $(`.chord1`).css("background-color", "yellow");
+    // }, ()=>{
+    //   $(`.chord1`).css("background-color", "white");
+    // })
+    // console.log(lines);
   }
+
+
   $('.chordStringForm').on('submit', parseText)
   // $('.addChords').on('keyDown', () => {
   //   if (e.key == "Enter") {
