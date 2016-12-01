@@ -56,7 +56,6 @@ function tabMaker(chordSpelling) {
           tabs['A'] = mod((notePosition - starting_indices['A']), 12)
           tabs['B'] = mod((notePosition - starting_indices['B']), 12)
         } else if (i == 3) {
-          debugger
           if (mod((notePosition - noteOrder.indexOf(parsed_notes[0])),12) == 10 ){
             tabs['D'] = mod((tabs['D'] - 2), 12)
           } else if (mod((notePosition - noteOrder.indexOf(parsed_notes[0])),12) == 11){

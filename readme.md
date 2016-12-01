@@ -1,75 +1,55 @@
-## Chord Parser
+#Chord Parser
+[Live Link]
+[Live Link]: https://chrome.google.com/webstore/detail/chord-parser/bbpkjlgmmdpkdngmglgpfleidnfhecfi				
 
-### Background
-Chord Parser is a chrome extension designed to make it easier for guitarists
-to figure out chord charts.
+Chord Parser is the ultimate tool for guitarists who are learning to read chord charts. This extension allows you to see tablature for every chord in the song that you're learning without leaving the chord chart page to find every chord individually.
 
-There are a lot of resources out there for guitarists to learn songs and the
-chord chart is the most succinct way to communicate the structure of a song.
-However, it is difficult to keep switching between a chord chart and
-the actual finger positions of a chord, especially if you're trying to learn
-a song as fast as possible. This app aims to bridge this information gap
-by keeping everything on one page.
+##Instructions
+  Enter a set of chord names or copy and paste a whole text file with chord names in it. Chord Parser will pull out chord names and return tablature for each chord along with the spelling of each chord.
 
-## Functionality & MVP  
 
-The app will have two modes of usage, both revolving around a keyboard shortcut.
-The current default command will be Command+Shift+,(comma).
+##Technologies and Technical Features
+This project uses the following technologies:
+- Vanilla JavaScript and `jQuery` for handling text parsing logic
+- Tonal for chord logic/formulas
+- Webpack for creating a single point of entry for HTML script declaration
 
-In the first usage case, the user will highlight any string of text with chord names. With
-the keyboard command, the app will parse the text and return a page of guitar
-chords written out in tablature that correspond to the highlighted text.
+### Chord Parsing Logic
+  This logic was created to take in any user input and only create output if there are valid inputs in the text. Due to the nature of music's limited alphabet, a lot of the work is already cut out for me in terms of filtering out non-musical input.
 
-In the second usage case, the user will press the keyboard command to open up a text window. In the text window,
-the user will enter a series of chord names separated by spaces. The app will then parse this text as in the
-first case. This is useful in the case of images of chord charts.
+  ![tag screenshot](screenshots/Musical_Alphabet.png)
+    In this screenshot, we are filtering the text down to any block of text that begins with a musical alphabet. This shuts out a lot of extraneous input.
 
-The app will also be able to save these chord charts locally for easy recall.
+  ![tag screenshot](screenshots/Chord_Conditions.png)
+    At this point, we have all the words that start with letters A-G. Chord qualities can be broken down to the following conditions shown in the screenshot above. Starting at the 1st index of each name allows us to remove small words such as "At" or "Be".
 
-### Wireframes
-This is the window when the app is called by keyboard shortcut.
-![tag wireframe](screenshots/Blank.png)
+    We also have to worry about accidentals in the name (i.e. b and #). As such, if accidentals exist in the name, I can move the checking algorithms to check one letter over for the qualities.
 
-The app will automatically look for chords in the highlighted text.
-![tag wireframe](screenshots/First_Highlight.png)
+    At this point, the final chord name is sent to the Tonal library to create the chord spellings for each chord. With the chord spellings, creating tablature for chords becomes trivial.
 
-Additional highlighted text will be added onto the current query
-![tag wireframe](screenshots/Add_Highlight.png)
 
-Chords can also be added on through the text input field
-![tag wireframe](screenshots/Add_Input.png)
 
-I am still deciding between displaying the chords on a seperate page or in line with the site. I will implement both.
-![tag wireframe](screenshots/New_Page_Parse.png)
-![tag wireframe](screenshots/Same_Page_Parse.png)
+### Tablature Display
+  Most of the chords that we use in guitar are based off of the drop-2 or barre chord shape. As barre chord shapes typically
+  have the same order of degrees going across the strings (6th string degrees from low to high: 1st, 5th, 1st, 3rd, 5th, 1st), all we need to do is take the chord spelling (1 3 5) and plug it into the the tablature parser.
 
-### Architecture and Technologies
-The project will utilize a couple of music-related javascript libraries to help out with the music logic behind the application.
- - VexChords for chord image display (https://github.com/0xfe/vexchords)
+  ![tag screenshot](screenshots/String_Magic.png)
 
-Otherwise, this will be purely JavaScript, HTML, and CSS.
+  To figure out where on a string a note is, I created an array with all of the possible notes and object indicating where in this array each string will start. I then grab the index of the chord tone as it is found in the possible notes array and I add this to the string's start index, keeping the number within a modulo of 12.
 
-### Implementation Timeline
-**Day 1**:
-  Text parser to chord data logic should be implemented. App should be able to differentiate between chord names and parts of other words based on context. App will also be able to show chord spellings based on chord type and be able to transpose these spellings based on the root note.
 
-**Day 2**:
-  App will be able to take input from the user and parse them into chords.
+  ![tag screenshot](screenshots/7th_Degree_Parsing_Snippet.png)
 
-**Day 3**:
-  Create views for the results of the app.
+  To add the 7th degree, we need to find where in the 6th string chord formula the 7th will go. Unfortunately, since the whole formula is already filled with 1 - 3 - 5 degree, we need to choose which notes to replace. Without going into too much music theory detail, we replace the 5th depending on how far from the root the 7th is. Once we figure out this distance, we can decide how far to move the 5th, resulting in a chord with proper 7ths.
+  <!-- As is typical in guitar chord theory, we eschew the 5th degree and replace it with the 7th. To change the position of the 5th to the 7th, we only need to move the existing note down the string. However, some chords have b7ths, which will change the positions -->
 
-**Day 4**:
-  CSS Styling and Bonus Features
 
-### Bonus features
-- [ ] Figure out the key of a song based on the chords given.
-- [ ] Parse images of chord charts
-- [ ] Chord image will appear on hover of the chord names instead of on a seperate page
-- [ ] Option to parse all the chords on a page at once
-- [ ] Implement an algorithm to decide which voicing to display based on the relative positions of all the other chords.
-- [ ] Chord chart and standard notation images are generated instead of tablature.
-- [ ] Save chord charts in the cloud so the user can take their chord charts with them.
-- [ ] Option to switch chord voicings on a chord-by-chord basis, potentially dynamically altering the positions of the other chords
-- [ ] Recommended notes to improvise with over each chord
-- [ ] Group by chord characteristics (open chord, drop 2, triad)
+
+
+##To-dos/future features
+  In future versions, I will be implementing the following features:
+    - Ability to switch between 5th string and 6th string chord views
+    - Extensions beyond 9th chords
+    - Altered Chords
+    - Key finder
+    - Save functionality
