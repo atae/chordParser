@@ -21,11 +21,7 @@ This project uses the following technologies:
     In this screenshot, we are filtering the text down to any block of text that begins with a musical alphabet. This shuts out a lot of extraneous input.
 
   ![tag screenshot](screenshots/Chord_Conditions.png)
-    At this point, we have all the words that start with letters A-G. Chord qualities can be broken down to the following conditions shown in the screenshot above. Starting at the 1st index of each name allows us to remove small words such as "At" or "Be".
-
-    We also have to worry about accidentals in the name (i.e. b and #). As such, if accidentals exist in the name, I can move the checking algorithms to check one letter over for the qualities.
-
-    At this point, the final chord name is sent to the Tonal library to create the chord spellings for each chord. With the chord spellings, creating tablature for chords becomes trivial.
+    At this point, we have all the words that start with letters A-G. Chord qualities can be broken down to the following conditions shown in the screenshot above. Starting at the 1st index of each name allows us to remove small words such as "At" or "Be". We also have to worry about accidentals in the name (i.e. b and #). As such, if accidentals exist in the name, I can move the checking algorithms to check one letter over for the qualities. At this point, the final chord name is sent to the Tonal library to create the chord spellings for each chord. With the chord spellings, creating tablature for chords becomes trivial.
 
 
 
